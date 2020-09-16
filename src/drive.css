@@ -1,0 +1,412 @@
+body {
+  font-family: arial;
+  font-size: 11px;
+}
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Roboto", sans-serif;
+}
+
+/*************** Google Login Box ***************/
+#login-box {
+  font-size: medium;
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 50px;
+  background-color: lightgreen;
+  width: 400px;
+  height: 200px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 5px 10px #888888;
+}
+
+.logout-link {
+  cursor: pointer;
+}
+/*************** END Google Login Box ***************/
+
+/*************** Google Drive Breadcrumb ***************/
+#drive-breadcrumb {
+  font-size: 14px;
+}
+
+#drive-breadcrumb a {
+  cursor: pointer;
+  color: red;
+}
+
+.breadcrumb-arrow {
+  background: url(../Images/arrow_right.png) no-repeat 0 7px;
+  display: inline-block;
+  height: 20px;
+  width: 15px;
+}
+/*************** END Google Drive Breadcrumb ***************/
+
+/*************** Google Drive Box ***************/
+#drive-box {
+  padding: 10px;
+  margin: 10px;
+  width: 98%;
+  box-sizing: border-box;
+  display: none;
+  position: relative;
+  min-height: 150px;
+}
+
+#transparent-wrapper {
+  display: none;
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  z-index: 1001;
+  -moz-opacity: 0.35;
+  opacity: 0.35;
+  filter: alpha(opacity=35);
+}
+
+#drive-content {
+  clear: both;
+  font-size: 15px;
+}
+
+.folder-box,
+.file-box {
+  float: left;
+  font-family: Arial;
+  width: 150px;
+  height: 150px;
+  text-align: center;
+  padding: 10px;
+  margin: 8px;
+}
+
+.image-preview {
+  text-align: center;
+  height: 80px;
+}
+
+.image-preview img {
+  max-width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.item-title {
+  word-wrap: break-word;
+  text-align: center;
+  font-size: 12px;
+  color: blue;
+  white-space: nowrap;
+  width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#drive-menu {
+  float: right;
+  display: inline-block;
+}
+
+#drive-menu div:hover {
+  background-color: #fafccc;
+  border: solid 1px #000;
+}
+
+#button-share.flash {
+  background-color: green;
+  color: white;
+}
+
+#button-trash.flash {
+  background-color: orangered;
+  color: white;
+}
+
+.button-box {
+  padding-top: 10px;
+}
+
+.button-delete,
+.button-info,
+.button-download {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+/*************** END Google Drive Box ***************/
+
+/************* User Drive Information **************/
+#user-info {
+  position: absolute;
+  height: 100px;
+  right: 0;
+  width: 200px;
+  margin-top: -110px;
+  background: #338daf;
+  z-index: 99999999;
+  color: #fff;
+  padding: 5px;
+  box-sizing: border-box;
+  text-align: right;
+  font-size: 11px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.user-item {
+  padding-bottom: 4px;
+}
+
+#drive-info {
+  position: absolute;
+  height: 90px;
+  right: 0;
+  width: 200px;
+  margin-top: -120px;
+  background: #338daf;
+  z-index: 99999999;
+  color: #fff;
+  padding: 5px;
+  box-sizing: border-box;
+  text-align: right;
+  font-size: 11px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+/************* END User Drive Information **************/
+
+/************* FLOATING BOX *********************/
+.float-box {
+  border-radius: 0px;
+  -webkit-box-shadow: 7px 7px 5px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow: 7px 7px 5px rgba(50, 50, 50, 0.75);
+  box-shadow: 7px 7px 5px rgba(50, 50, 50, 0.75);
+  width: 400px;
+  padding: 7px 15px;
+  border: solid 1px #ccc;
+  position: fixed;
+  left: 50%;
+  margin-left: -200px;
+  top: 35%;
+  z-index: 1000000;
+  background-color: #fff;
+  display: none;
+}
+
+.close-x {
+  float: right;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tbl-info {
+  border-left: solid 1px #ccc;
+  border-top: solid 1px #ccc;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.tbl-info td {
+  border-right: solid 1px #ccc;
+  border-bottom: solid 1px #ccc;
+  padding: 5px 10px;
+  font-size: 11px;
+}
+
+.tbl-info td.label {
+  background: #5f5d5c;
+  color: #fff;
+  text-align: right;
+  width: 50%;
+}
+
+#text-content {
+  margin-bottom: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 180px;
+  border: solid 1px #ccc;
+}
+
+.text-input {
+  width: 100%;
+  margin-bottom: 10px;
+  color: forestgreen;
+  font-size: medium;
+}
+
+/************* END FLOATING BOX *********************/
+
+/*************** NOTIFICATION ******************/
+#loading-wrapper {
+  width: 100%;
+  height: 100%;
+  top: 50px;
+  left: 0;
+  position: absolute;
+}
+
+#loading {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -60px;
+  margin-top: -60px;
+  width: 120px;
+}
+
+#status-message {
+  color: red;
+  border: solid 1px #fbfbd4;
+  background: #fbfbd4;
+  border-radius: 5px;
+  padding: 5px;
+  /*position:absolute;*/
+  right: 10px;
+  bottom: 10px;
+  z-index: 9999999999;
+  font-size: 15px;
+}
+
+#error-message {
+  border: solid 1px #f2fcb9;
+  background: #d83813;
+  border-radius: 5px;
+  color: #fff;
+  padding: 10px;
+  /*position:absolute;*/
+  left: 10px;
+  bottom: 10px;
+  z-index: 9999999999;
+  max-width: 400px;
+  border-radius: 5px;
+  display: none;
+}
+
+#upload-percentage {
+  position: absolute;
+  left: 46%;
+  top: 87%;
+  margin-left: -25px;
+  margin-top: -100px;
+  width: 301px;
+  height: 50px;
+  border-radius: 50px;
+  background: #297b07;
+  color: #fff;
+  text-align: center;
+  line-height: 50px;
+  font-weight: bold;
+  font-size: 15px;
+  display: none;
+}
+/*************** END NOTIFICATION ******************/
+
+/***************** MISC ************************/
+.button {
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  border: none;
+  -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius: 8px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 11px;
+  padding: 5px 10px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+  border: none;
+}
+
+.hide {
+  display: none;
+}
+
+.flash {
+  -webkit-animation-name: flash;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-name: flash;
+  -moz-animation-duration: 1s;
+  -moz-animation-timing-function: linear;
+  -moz-animation-iteration-count: infinite;
+  animation-name: flash;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@-moz-keyframes flash {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes flash {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes flash {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

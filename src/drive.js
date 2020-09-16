@@ -80,6 +80,7 @@ function getFiles() {
   request.execute(function (resp) {
     if (!resp.error) {
       DRIVE_FILES = resp.items;
+      // console.log(resp.items); //////////////////// Arrays of Google Drive Data
       buildFiles();
     } else {
       showErrorMessage("Error: " + resp.error.message);

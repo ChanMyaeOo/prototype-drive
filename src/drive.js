@@ -62,6 +62,36 @@ function handleSignoutClick(event) {
 function getDriveFiles() {
   showStatus("Loading Google Drive files...");
   gapi.client.load("drive", "v2", getFiles);
+  console.log('DATA....')
+  // fetchMarvinAPI();
+}
+
+// function fetchMarvinAPI() {
+//   let username = 'dave';
+// let password = '2Se7fR7Ffz4DQrnz';
+// let url = `https://marvin.urvin.ai:53117/matching/disambiguate?method=Eigen/basic-auth/${username}/${password}`
+// let authString = `${username}:${password}`
+// let headers = new Headers();
+// headers.set('Authorization', 'Basic ' + btoa(authString))
+// fetch(url,{method: 'GET', headers: headers})
+//     .then(function (response) {
+//         console.log (response)
+//         return response
+//     });
+// }
+
+async function fetchMarvinAPI() {
+  const response = await fetch('https://marvin.urvin.ai:53117/matching/disambiguate?method=Eigen', {
+    method: 'post',
+    headers: new Headers({
+      'Authorization': 'Basic ' + btoa('dave' + ":" + '2Se7fR7Ffz4DQrnz' ),
+      'Content-Type': 'application/json'
+    }), body: JSON.stringify({
+      'name': 'html-lessons'
+    })
+  });
+  const posts = await response.json();
+  console.log(posts)
 }
 
 function getFiles() {
@@ -80,6 +110,9 @@ function getFiles() {
   request.execute(function (resp) {
     if (!resp.error) {
       DRIVE_FILES = resp.items;
+
+      const responseItems = resp.items;
+      console.log(responseItems);
       // console.log(resp.items); //////////////////// Arrays of Google Drive Data
       buildFiles();
     } else {

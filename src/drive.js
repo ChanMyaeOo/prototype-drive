@@ -133,7 +133,7 @@ function buildFiles() {
           DRIVE_FILES[i].title +
           "' data-has-permission='" +
           DRIVE_FILES[i].hasPermission +
-          "'><div class='image-preview'><img src='./Images/folder.png'/></div></div>";
+          "'><div class='image-preview'><img src='../Images/folder.png'/></div></div>";
       } else {
         if (DRIVE_FILES[i].thumbnailLink) {
           fText +=

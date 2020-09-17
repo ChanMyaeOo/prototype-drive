@@ -98,8 +98,8 @@ function getFiles() {
   var query = "";
 
   query = "trashed=false and '" + FOLDER_ID + "' in parents";
-  //$(".button-opt").show();
-  //$(".share-opt").show();
+  // $(".button-opt").show();
+  // $(".share-opt").show();
   //$(".trash-opt").show();
 
   var request = gapi.client.drive.files.list({
@@ -207,7 +207,7 @@ function buildFiles() {
           }
         }
       }
-      fText += "<div class='item-title'>" + DRIVE_FILES[i].title + "</div>";
+      fText += "<div class='item-title'>" + DRIVE_FILES[i].title + `</div><button class='send-btn'>Send</button>`;
 
       fText += "</div>";
       //closing div
@@ -222,6 +222,9 @@ function buildFiles() {
   hideLoading();
 }
 
+
+
+
 //Initialize the click button for each individual drive file/folder
 //this need to be recalled everytime the Google Drive data is generated
 function initDriveButtons() {
@@ -231,6 +234,11 @@ function initDriveButtons() {
     //Browse folders only when folders are not in trash
     browseFolder($(this), 0);
   });
+
+  // Handle click for sending data to Marvin API
+  $(".send-btn").click(function() {
+    alert('Hahahahah ....')
+  })
 
   //Initiate the breadcrumb navigation link click
   $("#drive-breadcrumb a").unbind("click");

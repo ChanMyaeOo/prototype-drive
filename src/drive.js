@@ -213,7 +213,7 @@ function buildFiles() {
             fText +=
               "<div class='file-icon' data-file-counter='" +
               i +
-              "' ><div class='image-preview'><img src='../Images/" +
+              "' ><div class='image-preview'><img src='./Images/" +
               DRIVE_FILES[i].fileExtension +
               "-icon.png" +
               "'/></div></div>";
@@ -221,7 +221,7 @@ function buildFiles() {
             fText +=
               "<div class='file-icon' data-file-counter='" +
               i +
-              "' ><div class='image-preview'><img src='../Images/undefined-icon.png" +
+              "' ><div class='image-preview'><img src='./Images/undefined-icon.png" +
               "'/></div></div>";
           }
         }
@@ -432,7 +432,7 @@ function showLoading() {
     $("#drive-box").prepend("<div id='drive-box-loading'></div>");
   }
   $("#drive-box-loading").html(
-    "<div id='loading-wrapper'><div id='loading'><img src='../Images/loading.gif'></div></div>"
+    "<div id='loading-wrapper'><div id='loading'><img src='./Images/loading.gif'></div></div>"
   );
 }
 

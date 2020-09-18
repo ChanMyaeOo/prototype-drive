@@ -319,6 +319,12 @@ h6 {
 }
 /*************** END NOTIFICATION ******************/
 
+/****** Send Button *****/
+.send-btn {
+  font-size: 10px;
+  border-radius: 5px;
+}
+
 /***************** MISC ************************/
 .button {
   background: #3498db;

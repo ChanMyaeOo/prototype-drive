@@ -63,7 +63,6 @@ function handleSignoutClick(event) {
 function getDriveFiles() {
   showStatus("Loading Google Drive files...");
   gapi.client.load("drive", "v2", getFiles);
-  console.log('DATA....')
   // fetchMarvinAPI();
 }
 
@@ -81,18 +80,35 @@ function getDriveFiles() {
 //     });
 // }
 
-async function fetchMarvinAPI() {
+async function fetchMarvinAPI(searchTerms) {
   const response = await fetch('https://marvin.urvin.ai:53117/matching/disambiguate?method=Eigen', {
     method: 'post',
     headers: new Headers({
       'Authorization': 'Basic ' + btoa('dave' + ":" + '2Se7fR7Ffz4DQrnz' ),
       'Content-Type': 'application/json'
     }), body: JSON.stringify({
-      'name': 'html-lessons'
+      searchTerms
     })
-  });
-  const posts = await response.json();
-  console.log(posts)
+  }).then(response => {
+    if (response.status >= 400 && response.status < 600) {
+      throw new Error("Bad response from server");
+    }
+    alert(`See the Marvin API's response at developer console`)
+    return response.json();
+  })
+  .catch(error => {
+    alert('ERRor')
+  })
+
+  console.log(response)
+
+
+  // const marvinResultJSON = await response.json();
+  // if(marvinResultJSON) {
+  //   alert('OK')
+  // }
+  // console.log(marvinResultJSON);
+  // return marvinResult.length;
 }
 
 function getFiles() {
@@ -114,7 +130,7 @@ function getFiles() {
 
       const responseItems = resp.items;
       DATA_COLLECTONS = responseItems;
-      console.log(responseItems);
+      // console.log(responseItems);
       // console.log(resp.items); //////////////////// Arrays of Google Drive Data
       buildFiles(responseItems);
     } else {
@@ -242,8 +258,10 @@ function initDriveButtons() {
   // Handle click for sending data to Marvin API
   $(".send-btn").click(function() {
     const dataID = this.getAttribute("data-link");
-    
-    console.log('Result ... ', dataID)
+    const fileResult = DRIVE_FILES.find(driveFile => driveFile.id == dataID);
+    // console.log('Result ... ', DRIVE_FILES)
+    // fetchMarvinAPI(fileResult.title)
+    fetchMarvinAPI(fileResult.title);
     // console.log('ITEM filter ....', item)
     // alert(this.getAttribute("data-link"))
   })

@@ -10,6 +10,7 @@ var NO_OF_FILES = 1000;
 var DRIVE_FILES = [];
 var FILE_COUNTER = 0;
 var FOLDER_ARRAY = [];
+var DATA_COLLECTONS = [];
 
 /******************** AUTHENTICATION PROCESS ********************/
 
@@ -112,14 +113,16 @@ function getFiles() {
       DRIVE_FILES = resp.items;
 
       const responseItems = resp.items;
+      DATA_COLLECTONS = responseItems;
       console.log(responseItems);
       // console.log(resp.items); //////////////////// Arrays of Google Drive Data
-      buildFiles();
+      buildFiles(responseItems);
     } else {
       showErrorMessage("Error: " + resp.error.message);
     }
   });
 }
+
 
 function buildFiles() {
   var fText = "";
@@ -207,8 +210,9 @@ function buildFiles() {
           }
         }
       }
-      fText += "<div class='item-title'>" + DRIVE_FILES[i].title + `</div><button class='send-btn'>Send</button>`;
-
+      
+      fText += "<div class='item-title'>" + DRIVE_FILES[i].title + `</div><button class='send-btn' data-link="${DRIVE_FILES[i].id}">Send</button>`;
+      
       fText += "</div>";
       //closing div
       fText += "</div>";
@@ -237,7 +241,11 @@ function initDriveButtons() {
 
   // Handle click for sending data to Marvin API
   $(".send-btn").click(function() {
-    alert('Hahahahah ....')
+    const dataID = this.getAttribute("data-link");
+    
+    console.log('Result ... ', dataID)
+    // console.log('ITEM filter ....', item)
+    // alert(this.getAttribute("data-link"))
   })
 
   //Initiate the breadcrumb navigation link click

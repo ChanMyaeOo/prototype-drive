@@ -11,18 +11,6 @@
     
             <link href="./src/drive.css" rel="stylesheet" />
     
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-            
-            
-            <script src="./src/drive.js"></script>
-    
-            <script async defer src="https://apis.google.com/js/api.js"
-                    onload="this.onload=function(){};handleClientLoad()"
-                    onreadystatechange="if (this.readyState === 'complete') this.onload()">
-            </script>
-    
         </head>
     
         <body class="w3-light-grey">
@@ -35,6 +23,14 @@
                         <span class="glyphicon glyphicon-log-in"></span> Login
                     </button>
                 </p>
+            </div>
+
+            <div class="modal-bg">
+                <div class="modal-content">
+                    <span class="modal-close">&khcy;</span>
+                    <h1>Results</h1>
+                    
+                </div>
             </div>
     
             <div id="drive-box">
@@ -91,6 +87,20 @@
                     <!-- End Page Container -->
                 </div>
             </div>
+
+
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+            
+            
+            <script src="./src/drive.js"></script>
+    
+            <script async defer src="https://apis.google.com/js/api.js"
+                    onload="this.onload=function(){};handleClientLoad()"
+                    onreadystatechange="if (this.readyState === 'complete') this.onload()">
+            </script>
         </body>
     
         </html>

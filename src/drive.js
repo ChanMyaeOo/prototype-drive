@@ -11,6 +11,10 @@ var DRIVE_FILES = [];
 var FILE_COUNTER = 0;
 var FOLDER_ARRAY = [];
 var DATA_COLLECTONS = [];
+const modalBg = document.querySelector(".modal-bg");
+const modalContent = document.querySelector(".modal-content");
+const modalClose = document.querySelector(".modal-close");
+const modalWrapper = document.querySelector(".modal-wrapper");
 
 /******************** AUTHENTICATION PROCESS ********************/
 
@@ -81,27 +85,84 @@ function getDriveFiles() {
 // }
 
 async function fetchMarvinAPI(searchTerms) {
-  const response = await fetch('https://marvin.urvin.ai:53117/matching/disambiguate?method=Eigen', {
-    method: 'post',
-    headers: new Headers({
-      'Authorization': 'Basic ' + btoa('dave' + ":" + '2Se7fR7Ffz4DQrnz' ),
-      'Content-Type': 'application/json'
-    }), body: JSON.stringify({
-      searchTerms
-    })
-  }).then(response => {
-    if (response.status >= 400 && response.status < 600) {
-      throw new Error("Bad response from server");
+  const response = await fetch(
+    "https://marvin.urvin.ai:53117/matching/eigen_disambiguate?nca_scaling=2&",
+    {
+      method: "post",
+      headers: new Headers({
+        Authorization: "Basic " + btoa("dave" + ":" + "2Se7fR7Ffz4DQrnz"),
+        "Content-Type": "application/json",
+      }),
+      body: JSON.stringify({
+        searchTerms,
+      }),
     }
-    alert(`See the Marvin API's response at developer console`)
-    return response.json();
-  })
-  .catch(error => {
-    alert('ERRor')
-  })
+  )
+    .then((response) => {
+      if (response.status >= 400 && response.status < 600) {
+        throw new Error("Bad response from server");
+      }
+      // alert(`See the Marvin API's response at developer console`)
+      if (confirm(`Do you want to see the Marvin API's response?`)) {
+        // modalBg.classList.add('modal-bg-active')
+        return response.json();
+      }
+      return undefined;
+    })
+    .catch((error) => {
+      alert("ERRor");
+    });
 
-  console.log(response)
+  if (response) {
+    modalBg.classList.add("modal-bg-active");
+    const markUps = response.concepts.map((concept) => {
+      const { name, label, gender } = concept.meta;
+      const markUp = `
+      <div class="accordion-container">
+        <button class="accordion">Concept</button>
+        <div class="panel">
+          <p>ID: ${concept.id}</p>
+          <p>Name: ${name}</p>
+          <p>Label: ${label}</p>
+          <p>Gender: ${gender}</p>
+          <p>Weight: ${concept.weight}</p>
 
+          <p>Name: ${name}</p>
+          <p>Label: ${label}</p>
+          <p>Gender: ${gender}</p>
+          <p>Weight: ${concept.weight}</p>
+        </div>
+      </div>
+      `;
+      return markUp;
+    });
+
+    modalContent.insertAdjacentHTML("beforeend", markUps);
+
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
+        }
+      });
+    }
+
+    modalClose.addEventListener("click", (e) => {
+      modalBg.classList.remove("modal-bg-active");
+      // modalContent.insertAdjacentHTML('beforeend', '<span></span>');
+      document.querySelector(".accordion-container").innerHTML = "";
+    });
+    console.log(response.concepts);
+  } else {
+    console.log("UNDEFINED >>>");
+  }
 
   // const marvinResultJSON = await response.json();
   // if(marvinResultJSON) {
@@ -130,7 +191,7 @@ function getFiles() {
 
       const responseItems = resp.items;
       DATA_COLLECTONS = responseItems;
-      // console.log(responseItems);
+      console.log(responseItems, "RESPONSE ITEM >>> ");
       // console.log(resp.items); //////////////////// Arrays of Google Drive Data
       buildFiles(responseItems);
     } else {
@@ -138,7 +199,6 @@ function getFiles() {
     }
   });
 }
-
 
 function buildFiles() {
   var fText = "";
@@ -226,9 +286,12 @@ function buildFiles() {
           }
         }
       }
-      
-      fText += "<div class='item-title'>" + DRIVE_FILES[i].title + `</div><button class='send-btn' data-link="${DRIVE_FILES[i].id}">Send</button>`;
-      
+
+      fText +=
+        "<div class='item-title'>" +
+        DRIVE_FILES[i].title +
+        `</div><button class='send-btn' data-link="${DRIVE_FILES[i].id}">Send</button>`;
+
       fText += "</div>";
       //closing div
       fText += "</div>";
@@ -242,9 +305,6 @@ function buildFiles() {
   hideLoading();
 }
 
-
-
-
 //Initialize the click button for each individual drive file/folder
 //this need to be recalled everytime the Google Drive data is generated
 function initDriveButtons() {
@@ -256,15 +316,15 @@ function initDriveButtons() {
   });
 
   // Handle click for sending data to Marvin API
-  $(".send-btn").click(function() {
+  $(".send-btn").click(function () {
     const dataID = this.getAttribute("data-link");
-    const fileResult = DRIVE_FILES.find(driveFile => driveFile.id == dataID);
+    const fileResult = DRIVE_FILES.find((driveFile) => driveFile.id == dataID);
     // console.log('Result ... ', DRIVE_FILES)
     // fetchMarvinAPI(fileResult.title)
     fetchMarvinAPI(fileResult.title);
     // console.log('ITEM filter ....', item)
     // alert(this.getAttribute("data-link"))
-  })
+  });
 
   //Initiate the breadcrumb navigation link click
   $("#drive-breadcrumb a").unbind("click");
